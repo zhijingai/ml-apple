@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:lovlos="http://cc.lovlos.com/lovlos"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd  
+           http://www.springframework.org/schema/aop   
+           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd  
+           http://www.springframework.org/schema/tx  
+           http://www.springframework.org/schema/tx/spring-tx-3.2.xsd  
+           http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+           http://cc.lovlos.com/lovlos
+           http://cc.lovlos.com/lovlos.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	
+	<bean class="com.lovlos.mybatis.readwrite.Starter"></bean>
+	
+	<lovlos:setting>
+		<!-- 声明数据源 -->
+		<lovlos:master bean="writeDataSource" hystrix="1"/>
+		<lovlos:slave bean="readDataSource" hystrix="10"/>
+		<lovlos:slave bean="readDataSourceTwo" hystrix="10"/>
+		<lovlos:slave bean="readDataSourceThree"/>
+		<!-- 声明mapper配置 -->
+		<lovlos:mappers packages="com.lovlos.apple.mapper,com.lovlos.apple.mapper,com.lovlos.apple.mapper1" />
+		<!-- 声明负载均衡器 -->
+		<lovlos:balance location="com.lovlos.mybatis.readwrite.core.balance.RoundRobinDataSourceBalance" count="300" />
+	</lovlos:setting>
+	
+</beans>
+
