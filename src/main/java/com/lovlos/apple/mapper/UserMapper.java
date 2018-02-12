@@ -7,6 +7,6 @@ public interface UserMapper {
 
 	Integer select();
 	
-	@DataSource(dataSourceConfig=DataSourceConfig.SLAVE, dbName={"readDataSourceTwo"})
+	@DataSource(dataSourceConfig=DataSourceConfig.SLAVE, dbName={"readDataSourceTwo", "readDataSourceThree"})
 	Integer selectTwo();
 }

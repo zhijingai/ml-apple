@@ -10,7 +10,7 @@ import com.lovlos.util.SpringUtil;
 
 public class MyBatisTest {
 
-	private static ExecutorService pool = Executors.newFixedThreadPool(20);
+	private static ExecutorService pool = Executors.newFixedThreadPool(15);
 	
 	@SuppressWarnings({ "resource" })
 	public static void main(String[] args) {
@@ -29,8 +29,8 @@ public class MyBatisTest {
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						System.out.println(userMapper.select());
-						System.out.println(userMapper.selectTwo());
+						//userMapper.select();
+						userMapper.selectTwo();
 					}
 				});
 			}	
@@ -38,14 +38,14 @@ public class MyBatisTest {
 			System.out.println(e);
 		}
 		
-//		synchronized (MyBatisTest.class) {
-//			while (true) {
-//				try {
-//					MyBatisTest.class.wait();
-//				} catch (InterruptedException e) {
-//				}
-//			}
-//		}
+		synchronized (MyBatisTest.class) {
+			while (true) {
+				try {
+					MyBatisTest.class.wait();
+				} catch (InterruptedException e) {
+				}
+			}
+		}
 	}
 	
 }

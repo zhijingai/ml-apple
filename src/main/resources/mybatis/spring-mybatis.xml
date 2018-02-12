@@ -7,7 +7,7 @@
    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<!-- 基于Druid数据库链接池的数据源配置 -->
-	<bean id="writeDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	<bean id="writeDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">		
 		<!-- 基本属性driverClassName、 url、user、password -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="${jdbc.url}" />
@@ -35,7 +35,7 @@
 	</bean>
 
 	<!-- 基于Druid数据库链接池的数据源配置 -->
-	<bean id="readDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	<bean id="readDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
 		<!-- 基本属性driverClassName、 url、user、password -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="${jdbc.read.url}" />
@@ -62,7 +62,7 @@
 		<property name="useGlobalDataSourceStat" value="true"/>
 	</bean>
 	
-	<bean id="readDataSourceTwo" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	<bean id="readDataSourceTwo" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
 		<!-- 基本属性driverClassName、 url、user、password -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="${jdbc.read.url.two}" />
@@ -89,7 +89,7 @@
 		<property name="useGlobalDataSourceStat" value="true"/>
 	</bean>
 	
-	<bean id="readDataSourceThree" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	<bean id="readDataSourceThree" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
 		<!-- 基本属性driverClassName、 url、user、password -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="${jdbc.read.url.three}" />
@@ -102,6 +102,9 @@
 		<property name="maxActive" value="${Mysql.localhost.maxActive}" />
 		<property name="testWhileIdle" value="${Mysql.localhost.testWhileIdle}" />
 
+		<!-- <property name="testOnBorrow" value="true"/> -->
+        <!-- <property name="testOnReturn" value="false"/> -->
+		
 		<!-- 配置获取连接等待超时的时间 -->
 		<property name="maxWait" value="${Mysql.localhost.maxWait}" />
 		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
